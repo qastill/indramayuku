@@ -57,11 +57,11 @@ export function CategoryFilter({ categories, current, searchParams }: Props) {
                                       current ? 'border-brand-400 text-brand-700 bg-brand-50' : 'border-gray-200 text-gray-600 hover:border-brand-300'
                           }`}
                         >
-                        <span>{currentCategory?.icon || '📂'}</span>span>
-                        <span>{currentCategory?.name || 'Semua Kategori'}</span>span>
+                        <span>{currentCategory?.icon || '📂'}</span>
+                        <span>{currentCategory?.name || 'Semua Kategori'}</span>
                         <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
-                </button>button>
-        
+                </button>
+
           {isOpen && (
                   <div className="absolute top-full left-0 mt-2 w-72 max-h-96 overflow-auto bg-white rounded-xl border border-gray-200 shadow-xl z-50">
                             <button
@@ -71,10 +71,10 @@ export function CategoryFilter({ categories, current, searchParams }: Props) {
                                                           !current ? 'bg-brand-50 text-brand-700' : 'text-gray-700'
                                           }`}
                                         >
-                                        <span className="text-lg">📂</span>span>
-                                        <span className="flex-1 font-medium">Semua Kategori</span>span>
+                                        <span className="text-lg">📂</span>
+                                        <span className="flex-1 font-medium">Semua Kategori</span>
                               {!current && <Check className="w-4 h-4 text-brand-500" />}
-                            </button>button>
+                            </button>
                             <div className="h-px bg-gray-100" />
                             <div className="py-1">
                               {categoriesWithPlaces.map(cat => (
@@ -86,18 +86,18 @@ export function CategoryFilter({ categories, current, searchParams }: Props) {
                                                                         current === cat.slug ? 'bg-brand-50 text-brand-700' : 'text-gray-700'
                                                     }`}
                                                   >
-                                                  <span className="text-lg">{cat.icon}</span>span>
-                                                  <span className="flex-1 font-medium text-sm">{cat.name}</span>span>
-                                                  <span className="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">{cat.place_count}</span>span>
+                                                  <span className="text-lg">{cat.icon}</span>
+                                                  <span className="flex-1 font-medium text-sm">{cat.name}</span>
+                                                  <span className="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">{cat.place_count}</span>
                                     {current === cat.slug && <Check className="w-4 h-4 text-brand-500" />}
-                                  </button>button>
+                                  </button>
                                 ))}
-                            </div>div>
+                            </div>
                     {categoriesWithPlaces.length === 0 && (
-                                <div className="px-4 py-8 text-center text-gray-500 text-sm">Tidak ada kategori tersedia</div>div>
+                                <div className="px-4 py-8 text-center text-gray-500 text-sm">Tidak ada kategori tersedia</div>
                             )}
-                  </div>div>
+                  </div>
               )}
-        </div>div>
+        </div>
       )
-}</button>
+}

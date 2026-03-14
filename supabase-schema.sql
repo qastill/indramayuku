@@ -339,6 +339,76 @@ ARRAY['batik', 'batik indramayu', 'paoman', 'oleh-oleh', 'kerajinan'], true, 4.6
 ARRAY['oleh-oleh', 'mangga', 'kerupuk', 'terasi', 'dodol'], true, 4.5, 289);
 
 -- ================================================
+-- FORUM POSTS TABLE
+-- ================================================
+CREATE TABLE public.forum_posts (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
+  title TEXT NOT NULL,
+  content TEXT NOT NULL,
+  category TEXT DEFAULT 'Umum',
+  kecamatan TEXT,
+  images TEXT[],
+  views INTEGER DEFAULT 0,
+  comment_count INTEGER DEFAULT 0,
+  like_count INTEGER DEFAULT 0,
+  is_pinned BOOLEAN DEFAULT FALSE,
+  is_solved BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE public.forum_posts ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Forum posts viewable by everyone" ON public.forum_posts FOR SELECT USING (true);
+CREATE POLICY "Authenticated users can post" ON public.forum_posts FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "Users can update own posts" ON public.forum_posts FOR UPDATE USING (auth.uid() = user_id);
+CREATE POLICY "Users can delete own posts" ON public.forum_posts FOR DELETE USING (auth.uid() = user_id);
+
+-- ================================================
+-- FORUM COMMENTS TABLE
+-- ================================================
+CREATE TABLE public.forum_comments (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  post_id UUID REFERENCES public.forum_posts(id) ON DELETE CASCADE NOT NULL,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
+  content TEXT NOT NULL,
+  like_count INTEGER DEFAULT 0,
+  is_solution BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE public.forum_comments ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Forum comments viewable by everyone" ON public.forum_comments FOR SELECT USING (true);
+CREATE POLICY "Authenticated users can comment" ON public.forum_comments FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "Users can update own comments" ON public.forum_comments FOR UPDATE USING (auth.uid() = user_id);
+CREATE POLICY "Users can delete own comments" ON public.forum_comments FOR DELETE USING (auth.uid() = user_id);
+
+-- Trigger: update comment_count on forum_posts
+CREATE OR REPLACE FUNCTION public.update_forum_comment_count()
+RETURNS TRIGGER AS $$
+BEGIN
+  UPDATE public.forum_posts
+  SET comment_count = (SELECT COUNT(*) FROM public.forum_comments WHERE post_id = COALESCE(NEW.post_id, OLD.post_id))
+  WHERE id = COALESCE(NEW.post_id, OLD.post_id);
+  RETURN COALESCE(NEW, OLD);
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+CREATE TRIGGER on_forum_comment_change
+  AFTER INSERT OR DELETE ON public.forum_comments
+  FOR EACH ROW EXECUTE PROCEDURE public.update_forum_comment_count();
+
+-- Sample forum posts
+INSERT INTO public.forum_posts (user_id, title, content, category, kecamatan, views, comment_count, is_pinned)
+SELECT
+  (SELECT id FROM auth.users LIMIT 1),
+  'Selamat datang di Forum Warga Indramayu! 🥭',
+  'Halo warga Indramayu! Forum ini adalah tempat kita berdiskusi, berbagi info, jual beli, dan saling bantu. Yuk ramaikan forum ini!',
+  'Info Penting', 'Indramayu', 150, 0, true
+WHERE EXISTS (SELECT 1 FROM auth.users LIMIT 1);
+
+-- ================================================
 -- STORAGE BUCKETS
 -- ================================================
 -- Jalankan ini di Supabase Storage:

@@ -60,10 +60,10 @@ export function KecamatanFilter({ current, searchParams }: Props) {
                           }`}
                         >
                         <MapPin className="w-4 h-4" />
-                        <span>{current ? `Kec. ${current}` : 'Semua Kecamatan'}</span>span>
+                        <span>{current ? `Kec. ${current}` : 'Semua Kecamatan'}</span>
                         <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
-                </button>button>
-        
+                </button>
+
           {isOpen && (
                   <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl border border-gray-200 shadow-xl z-50">
                             <div className="p-2 border-b border-gray-100">
@@ -75,7 +75,7 @@ export function KecamatanFilter({ current, searchParams }: Props) {
                                                         className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                                                         autoFocus
                                                       />
-                            </div>div>
+                            </div>
                             <button
                                           type="button"
                                           onClick={() => handleSelect('')}
@@ -84,9 +84,9 @@ export function KecamatanFilter({ current, searchParams }: Props) {
                                           }`}
                                         >
                                         <MapPin className="w-4 h-4" />
-                                        <span className="flex-1 font-medium">Semua Kecamatan</span>span>
+                                        <span className="flex-1 font-medium">Semua Kecamatan</span>
                               {!current && <Check className="w-4 h-4 text-blue-500" />}
-                            </button>button>
+                            </button>
                             <div className="h-px bg-gray-100" />
                             <div className="max-h-60 overflow-auto py-1">
                               {filteredKecamatan.map(kec => (
@@ -98,16 +98,16 @@ export function KecamatanFilter({ current, searchParams }: Props) {
                                                                         current === kec ? 'bg-blue-50 text-blue-700' : 'text-gray-700'
                                                     }`}
                                                   >
-                                                  <span className="flex-1 text-sm">{kec}</span>span>
+                                                  <span className="flex-1 text-sm">{kec}</span>
                                     {current === kec && <Check className="w-4 h-4 text-blue-500" />}
-                                  </button>button>
+                                  </button>
                                 ))}
                               {filteredKecamatan.length === 0 && (
-                                  <div className="px-4 py-4 text-center text-gray-500 text-sm">Kecamatan tidak ditemukan</div>div>
+                                  <div className="px-4 py-4 text-center text-gray-500 text-sm">Kecamatan tidak ditemukan</div>
                                         )}
-                            </div>div>
-                  </div>div>
+                            </div>
+                  </div>
               )}
-        </div>div>
+        </div>
       )
-}</button>
+}

@@ -33,17 +33,6 @@ async function getTotalStats() {
   return { places: places || 0, reviews: reviews || 0, posts: posts || 0 }
 }
 
-const HERO_QUICK = [
-  { icon: '🍽️', label: 'Kuliner', href: '/categories/kuliner' },
-  { icon: '🌊', label: 'Wisata', href: '/categories/wisata' },
-  { icon: '🔨', label: 'Jasa', href: '/jasa' },
-  { icon: '🕌', label: 'Masjid', href: '/masjid' },
-  { icon: '💊', label: 'Apotek', href: '/apotek' },
-  { icon: '💼', label: 'Loker', href: '/categories/loker' },
-  { icon: '🗣️', label: 'Forum', href: '/forum' },
-  { icon: '🗺️', label: 'Peta', href: '/peta' },
-]
-
 const CAT_FORUM: Record<string, string> = {
   'Tanya Jawab': 'bg-blue-100 text-blue-700',
   'Jual Beli': 'bg-green-100 text-green-700',
@@ -92,14 +81,6 @@ export default async function HomePage() {
               <button type="submit" className="bg-white text-brand-600 px-6 py-4 rounded-2xl font-bold hover:bg-orange-50 transition-all shadow-lg shrink-0">Cari</button>
             </form>
 
-            <div className="flex flex-wrap gap-2">
-              {HERO_QUICK.map(item => (
-                <Link key={item.href} href={item.href}
-                  className="flex items-center gap-1.5 px-4 py-2 bg-white/20 backdrop-blur-sm text-white border border-white/30 rounded-full text-sm font-medium hover:bg-white/30 transition-all">
-                  <span>{item.icon}</span><span>{item.label}</span>
-                </Link>
-              ))}
-            </div>
           </div>
         </div>
 
@@ -111,30 +92,6 @@ export default async function HomePage() {
               <div><span className="font-bold text-lg text-white">{stats.posts}+</span> Post Forum</div>
               <div><span className="font-bold text-lg text-white">31</span> Kecamatan</div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* QUICK ACCESS */}
-      <section className="py-10 bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-4 sm:grid-cols-8 gap-3">
-            {[
-              { icon: '🍽️', label: 'Kuliner', href: '/categories/kuliner', color: 'bg-orange-50' },
-              { icon: '🌊', label: 'Wisata', href: '/categories/wisata', color: 'bg-sky-50' },
-              { icon: '🏨', label: 'Hotel', href: '/categories/hotel', color: 'bg-purple-50' },
-              { icon: '🕌', label: 'Masjid', href: '/masjid', color: 'bg-emerald-50' },
-              { icon: '🔨', label: 'Jasa', href: '/jasa', color: 'bg-amber-50' },
-              { icon: '💊', label: 'Apotek', href: '/apotek', color: 'bg-violet-50' },
-              { icon: '🗣️', label: 'Forum', href: '/forum', color: 'bg-pink-50' },
-              { icon: '🗺️', label: 'Peta', href: '/peta', color: 'bg-blue-50' },
-            ].map(item => (
-              <Link key={item.href} href={item.href}
-                className={`${item.color} flex flex-col items-center gap-2 p-4 rounded-2xl hover:shadow-md transition-all group border border-gray-100 hover:border-brand-200`}>
-                <span className="text-3xl group-hover:scale-110 transition-transform">{item.icon}</span>
-                <span className="text-xs font-semibold text-gray-700">{item.label}</span>
-              </Link>
-            ))}
           </div>
         </div>
       </section>

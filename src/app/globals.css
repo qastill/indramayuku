@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,300;0,600;1,300&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand: #E8520A;
+  --brand-light: #FB923C;
+  --brand-dark: #C2410C;
+  --batik: #8B1A1A;
+  --mangga: #F5A623;
+  --laut: #1A6B8A;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background-color: #FAFAF8;
+  color: #1A1A1A;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+@layer components {
+  .btn-brand {
+    @apply bg-brand-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-brand-600 transition-all duration-200 active:scale-95 shadow-sm hover:shadow-md;
+  }
+  
+  .btn-outline {
+    @apply border-2 border-brand-500 text-brand-500 px-6 py-3 rounded-xl font-semibold hover:bg-brand-50 transition-all duration-200;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-200;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium;
+  }
+
+  .star-filled {
+    color: #F5A623;
+  }
+
+  .star-empty {
+    color: #D1D5DB;
+  }
+
+  .section-title {
+    @apply font-display text-2xl md:text-3xl font-bold text-gray-900;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100 transition-all duration-200;
+  }
+}
+
+/* Batik pattern background */
+.batik-bg {
+  background-image: 
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(232,82,10,0.03) 10px,
+      rgba(232,82,10,0.03) 20px
+    );
+}
+
+/* Scrollbar custom */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #E8520A; border-radius: 3px; }
+
+/* Rating stars animation */
+.star-hover:hover { transform: scale(1.2); }
+
+/* Card hover effect */
+.place-card:hover .place-image {
+  transform: scale(1.05);
+}
+
+/* Hero text shadow */
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Skeleton loading */
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}

@@ -7,7 +7,7 @@ import { ReviewCard } from '@/components/reviews/ReviewCard'
 import { WriteReviewButton } from '@/components/reviews/WriteReviewButton'
 import type { Metadata } from 'next'
 
-interface Props { params: { slug: string } }
+interface Props { params: { id: string } }
 
 const HARI = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu']
 const HARI_LABEL: Record<string, string> = {
@@ -35,7 +35,7 @@ async function getReviews(placeId: string) {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const place = await getPlace(params.slug)
+  const place = await getPlace(params.id)
   if (!place) return { title: 'Tempat tidak ditemukan' }
   return {
     title: `${place.name} - Review & Info | Indramayuku`,
@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function PlaceDetailPage({ params }: Props) {
-  const place = await getPlace(params.slug)
+  const place = await getPlace(params.id)
   if (!place) notFound()
 
   const reviews = await getReviews(place.id)

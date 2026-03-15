@@ -110,10 +110,18 @@ export function Footer() {
               <a href="#" className="w-9 h-9 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-brand-600 transition-colors">
                 <Facebook className="w-4 h-4" />
               </a>
+              <a href="https://wa.me/6285260409720" target="_blank" rel="noopener noreferrer" className="w-9 h-9 bg-green-600 rounded-lg flex items-center justify-center hover:bg-green-500 transition-colors">
+                <MessageSquare className="w-4 h-4" />
+              </a>
               <a href="mailto:info@indramayuku.com" className="w-9 h-9 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-brand-600 transition-colors">
                 <Mail className="w-4 h-4" />
               </a>
             </div>
+            <a href="https://wa.me/6285260409720" target="_blank" rel="noopener noreferrer"
+              className="mt-3 flex items-center gap-2 text-sm text-green-400 hover:text-green-300 transition-colors">
+              <MessageSquare className="w-4 h-4" />
+              0852-6040-9720
+            </a>
           </div>
         </div>
 

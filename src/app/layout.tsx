@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
+import { WhatsAppButton } from '@/components/ui/WhatsAppButton'
 import { Toaster } from 'react-hot-toast'
 
 export const metadata: Metadata = {
@@ -30,6 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </main>
         <Footer />
+        <WhatsAppButton />
         <Toaster position="bottom-center" toastOptions={{
           style: { fontFamily: 'Plus Jakarta Sans', borderRadius: '12px' }
         }} />

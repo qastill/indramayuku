@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Search, MapPin, ChevronRight } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
-import { Category } from '@/types'
+import { Category, CATEGORY_IMAGES } from '@/types'
 
 export const revalidate = 60
 
@@ -56,18 +56,28 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-4 sm:grid-cols-6 gap-2 max-w-2xl mx-auto">
-            {categories.map((cat) => (
-              <Link
-                key={cat.id}
-                href={`/places?category=${cat.slug}`}
-                className="flex flex-col items-center gap-1 p-2.5 bg-white/10 hover:bg-white/20 rounded-xl transition-all border border-white/10 hover:border-white/30 group"
-              >
-                <span className="text-xl group-hover:scale-110 transition-transform">{cat.icon}</span>
-                <span className="text-[10px] font-medium text-white/90 text-center leading-tight truncate w-full">{cat.name}</span>
-                <span className="text-[10px] text-white/50">{cat.place_count}</span>
-              </Link>
-            ))}
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 max-w-3xl mx-auto">
+            {categories.map((cat) => {
+              const imgUrl = CATEGORY_IMAGES[cat.slug] || CATEGORY_IMAGES.default
+              return (
+                <Link
+                  key={cat.id}
+                                    href={`/places?category=${cat.slug}`}
+                  className="group relative overflow-hidden rounded-xl aspect-square"
+                >
+                  <img
+                    src={imgUrl}
+                    alt={cat.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-2 text-center">
+                    <span className="text-[11px] font-semibold text-white leading-tight block truncate">{cat.name}</span>
+                    <span className="text-[10px] text-white/70">{cat.place_count}</span>
+                  </div>
+                </Link>
+              )
+            })}
           </div>
         </div>
       </section>

@@ -4,7 +4,7 @@ import { MessageSquare, Eye, ThumbsUp, Pin, PlusCircle, TrendingUp, Clock } from
 import { formatDistanceToNow } from 'date-fns'
 import { id } from 'date-fns/locale'
 
-const FORUM_CATEGORIES = [
+const FORUM_CATEGORIES = 
   { name: 'Semua', slug: '', icon: '📋' },
   { name: 'Tanya Jawab', slug: 'Tanya Jawab', icon: '❓' },
   { name: 'Jual Beli', slug: 'Jual Beli', icon: '🛍️' },
@@ -139,7 +139,7 @@ export default async function ForumPage({ searchParams }: Props) {
                           <span>{timeAgo}</span>
                           <div className="flex items-center gap-3 ml-auto">
                             <span className="flex items-center gap-1"><Eye className="w-3 h-3" />{post.views}</span>
-                            <span className="flex items-center gap-1"><ThumbsUp className="w-3 h-3" />{post.likes}</span>
+                            <span className="flex items-center gap-1"><ThumbsUp className="w-3 h-3" />{post.like_count}</span>
                             <span className="flex items-center gap-1"><MessageSquare className="w-3 h-3" />{post.comment_count}</span>
                           </div>
                         </div>

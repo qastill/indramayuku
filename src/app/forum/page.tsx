@@ -4,7 +4,7 @@ import { MessageSquare, Eye, ThumbsUp, Pin, PlusCircle, TrendingUp, Clock } from
 import { formatDistanceToNow } from 'date-fns'
 import { id } from 'date-fns/locale'
 
-const FORUM_CATEGORIES = 
+const FORUM_CATEGORIES = [ 
   { name: 'Semua', slug: '', icon: '📋' },
   { name: 'Tanya Jawab', slug: 'Tanya Jawab', icon: '❓' },
   { name: 'Jual Beli', slug: 'Jual Beli', icon: '🛍️' },
